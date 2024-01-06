@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import '../../../main.dart';
 
-class SearchBarUI extends ReactiveStatelessWidget {
+class SearchBarUI extends UI {
   const SearchBarUI({super.key});
 
   @override

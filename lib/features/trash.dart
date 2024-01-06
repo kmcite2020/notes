@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'notes/notes.dart';
 import '../main.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
 
 class TrashPage extends ReactiveStatelessWidget {
   const TrashPage({
@@ -39,14 +36,12 @@ class TrashPage extends ReactiveStatelessWidget {
 final trashManager = TrashManager();
 
 class TrashManager {
-  final trashedNotesRM = RM.injectStream(
-    notesRepository.watchDeletedNotes,
+  final trashedNotesRM = RM.inject(
+    () => <Note>[],
     initialState: <Note>[],
   );
   List<Note> get trashedNotes => trashedNotesRM.state;
 
   void permanentlyDeleteNote(Note note) {}
-  void undoDeleteNote(Note note) {
-    notesRepository.undoDeleteNote(note);
-  }
+  void undoDeleteNote(Note note) {}
 }
