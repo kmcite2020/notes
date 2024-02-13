@@ -1,25 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:notes/main.dart';
 
-class ArchivesPage extends ReactiveStatelessWidget {
+class ArchivesPage extends UI {
   const ArchivesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar.large(
-          title: SearchBar(),
-          actions: [],
-        ),
-        SliverList.list(
-          children: [
-            Text(
-              'Archives',
-            )
-          ],
-        )
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: SearchBar(),
+        actions: [],
+        toolbarHeight: 80,
+      ),
+      // body: ListView.builder(
+      //   itemCount: notesManager.archivedNotes.length,
+      //   itemBuilder: (context, index) =>
+      //       notesManager.archivedNotes[index].text(),
+      // ),
     );
   }
 }

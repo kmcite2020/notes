@@ -20,31 +20,31 @@ Note _$NoteFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Note {
-  String get noteID => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
   bool get isArchived => throw _privateConstructorUsedError;
-  bool get isDeleted => throw _privateConstructorUsedError;
+  bool get isRemoved => throw _privateConstructorUsedError;
   bool get editing => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String noteID, String title, String description,
-            DateTime created, bool isArchived, bool isDeleted, bool editing)
+    required TResult Function(String id, String title, String description,
+            DateTime created, bool isArchived, bool isRemoved, bool editing)
         raw,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String noteID, String title, String description,
-            DateTime created, bool isArchived, bool isDeleted, bool editing)?
+    TResult? Function(String id, String title, String description,
+            DateTime created, bool isArchived, bool isRemoved, bool editing)?
         raw,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String noteID, String title, String description,
-            DateTime created, bool isArchived, bool isDeleted, bool editing)?
+    TResult Function(String id, String title, String description,
+            DateTime created, bool isArchived, bool isRemoved, bool editing)?
         raw,
     required TResult orElse(),
   }) =>
@@ -76,12 +76,12 @@ abstract class $NoteCopyWith<$Res> {
       _$NoteCopyWithImpl<$Res, Note>;
   @useResult
   $Res call(
-      {String noteID,
+      {String id,
       String title,
       String description,
       DateTime created,
       bool isArchived,
-      bool isDeleted,
+      bool isRemoved,
       bool editing});
 }
 
@@ -98,18 +98,18 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? noteID = null,
+    Object? id = null,
     Object? title = null,
     Object? description = null,
     Object? created = null,
     Object? isArchived = null,
-    Object? isDeleted = null,
+    Object? isRemoved = null,
     Object? editing = null,
   }) {
     return _then(_value.copyWith(
-      noteID: null == noteID
-          ? _value.noteID
-          : noteID // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -127,9 +127,9 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.isArchived
           : isArchived // ignore: cast_nullable_to_non_nullable
               as bool,
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
+      isRemoved: null == isRemoved
+          ? _value.isRemoved
+          : isRemoved // ignore: cast_nullable_to_non_nullable
               as bool,
       editing: null == editing
           ? _value.editing
@@ -147,12 +147,12 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String noteID,
+      {String id,
       String title,
       String description,
       DateTime created,
       bool isArchived,
-      bool isDeleted,
+      bool isRemoved,
       bool editing});
 }
 
@@ -166,18 +166,18 @@ class __$$NoteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? noteID = null,
+    Object? id = null,
     Object? title = null,
     Object? description = null,
     Object? created = null,
     Object? isArchived = null,
-    Object? isDeleted = null,
+    Object? isRemoved = null,
     Object? editing = null,
   }) {
     return _then(_$NoteImpl(
-      noteID: null == noteID
-          ? _value.noteID
-          : noteID // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -195,9 +195,9 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.isArchived
           : isArchived // ignore: cast_nullable_to_non_nullable
               as bool,
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
+      isRemoved: null == isRemoved
+          ? _value.isRemoved
+          : isRemoved // ignore: cast_nullable_to_non_nullable
               as bool,
       editing: null == editing
           ? _value.editing
@@ -211,12 +211,12 @@ class __$$NoteImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NoteImpl extends _Note {
   const _$NoteImpl(
-      {this.noteID = '',
+      {this.id = '',
       this.title = '',
       this.description = '',
       required this.created,
       this.isArchived = false,
-      this.isDeleted = false,
+      this.isRemoved = false,
       this.editing = true})
       : super._();
 
@@ -225,7 +225,7 @@ class _$NoteImpl extends _Note {
 
   @override
   @JsonKey()
-  final String noteID;
+  final String id;
   @override
   @JsonKey()
   final String title;
@@ -239,14 +239,14 @@ class _$NoteImpl extends _Note {
   final bool isArchived;
   @override
   @JsonKey()
-  final bool isDeleted;
+  final bool isRemoved;
   @override
   @JsonKey()
   final bool editing;
 
   @override
   String toString() {
-    return 'Note.raw(noteID: $noteID, title: $title, description: $description, created: $created, isArchived: $isArchived, isDeleted: $isDeleted, editing: $editing)';
+    return 'Note.raw(id: $id, title: $title, description: $description, created: $created, isArchived: $isArchived, isRemoved: $isRemoved, editing: $editing)';
   }
 
   @override
@@ -254,22 +254,22 @@ class _$NoteImpl extends _Note {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteImpl &&
-            (identical(other.noteID, noteID) || other.noteID == noteID) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.created, created) || other.created == created) &&
             (identical(other.isArchived, isArchived) ||
                 other.isArchived == isArchived) &&
-            (identical(other.isDeleted, isDeleted) ||
-                other.isDeleted == isDeleted) &&
+            (identical(other.isRemoved, isRemoved) ||
+                other.isRemoved == isRemoved) &&
             (identical(other.editing, editing) || other.editing == editing));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, noteID, title, description,
-      created, isArchived, isDeleted, editing);
+  int get hashCode => Object.hash(runtimeType, id, title, description, created,
+      isArchived, isRemoved, editing);
 
   @JsonKey(ignore: true)
   @override
@@ -280,36 +280,35 @@ class _$NoteImpl extends _Note {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String noteID, String title, String description,
-            DateTime created, bool isArchived, bool isDeleted, bool editing)
+    required TResult Function(String id, String title, String description,
+            DateTime created, bool isArchived, bool isRemoved, bool editing)
         raw,
   }) {
-    return raw(
-        noteID, title, description, created, isArchived, isDeleted, editing);
+    return raw(id, title, description, created, isArchived, isRemoved, editing);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String noteID, String title, String description,
-            DateTime created, bool isArchived, bool isDeleted, bool editing)?
+    TResult? Function(String id, String title, String description,
+            DateTime created, bool isArchived, bool isRemoved, bool editing)?
         raw,
   }) {
     return raw?.call(
-        noteID, title, description, created, isArchived, isDeleted, editing);
+        id, title, description, created, isArchived, isRemoved, editing);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String noteID, String title, String description,
-            DateTime created, bool isArchived, bool isDeleted, bool editing)?
+    TResult Function(String id, String title, String description,
+            DateTime created, bool isArchived, bool isRemoved, bool editing)?
         raw,
     required TResult orElse(),
   }) {
     if (raw != null) {
       return raw(
-          noteID, title, description, created, isArchived, isDeleted, editing);
+          id, title, description, created, isArchived, isRemoved, editing);
     }
     return orElse();
   }
@@ -352,19 +351,19 @@ class _$NoteImpl extends _Note {
 
 abstract class _Note extends Note {
   const factory _Note(
-      {final String noteID,
+      {final String id,
       final String title,
       final String description,
       required final DateTime created,
       final bool isArchived,
-      final bool isDeleted,
+      final bool isRemoved,
       final bool editing}) = _$NoteImpl;
   const _Note._() : super._();
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$NoteImpl.fromJson;
 
   @override
-  String get noteID;
+  String get id;
   @override
   String get title;
   @override
@@ -374,7 +373,7 @@ abstract class _Note extends Note {
   @override
   bool get isArchived;
   @override
-  bool get isDeleted;
+  bool get isRemoved;
   @override
   bool get editing;
   @override
@@ -473,10 +472,11 @@ class __$$NotesImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NotesImpl implements _Notes {
+class _$NotesImpl extends _Notes {
   const _$NotesImpl(
       {final Map<String, Note> cache = const <String, Note>{}, this.query = ''})
-      : _cache = cache;
+      : _cache = cache,
+        super._();
 
   factory _$NotesImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotesImplFromJson(json);
@@ -527,9 +527,10 @@ class _$NotesImpl implements _Notes {
   }
 }
 
-abstract class _Notes implements Notes {
+abstract class _Notes extends Notes {
   const factory _Notes({final Map<String, Note> cache, final String query}) =
       _$NotesImpl;
+  const _Notes._() : super._();
 
   factory _Notes.fromJson(Map<String, dynamic> json) = _$NotesImpl.fromJson;
 

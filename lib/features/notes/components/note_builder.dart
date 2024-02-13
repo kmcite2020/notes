@@ -11,8 +11,11 @@ class NoteBuilder extends UI {
 
   @override
   Widget build(BuildContext context) {
-    final note = notesManager.id(noteID);
-    if (note.noteID == '') return 'Invalid ID'.text();
-    return builder(note);
+    
+    final notes = ref.watch(notePodProvider);
+
+    final note = notes.cache[noteID];
+    if (note == '') return 'Invalid ID'.text();
+    return builder(note!);
   }
 }

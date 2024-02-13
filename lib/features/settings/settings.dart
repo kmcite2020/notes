@@ -1,3 +1,5 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../../main.dart';
 
 part 'settings.g.dart';
@@ -6,8 +8,8 @@ part 'settings.freezed.dart';
 enum NotesViewMode { list, grid }
 
 @freezed
-class Settings with _$Settings {
-  const factory Settings({
+class SettingsState with _$SettingsState {
+  const factory SettingsState({
     @Default(ThemeMode.system) final ThemeMode themeMode,
     @MaterialColorConverter()
     @Default(Colors.blue)
@@ -17,36 +19,26 @@ class Settings with _$Settings {
     @Default(8.0) final double padding,
   }) = _Settings;
 
-  factory Settings.fromJson(json) => _$SettingsFromJson(json);
+  factory SettingsState.fromJson(json) => _$SettingsStateFromJson(json);
 }
 
-final settingsManager = SettingsManager();
-
-class SettingsManager {
-  final settingsRM = RM.inject(
-    () => Settings(),
-    persist: () => PersistState(
-      key: 'settings',
-      toJson: (s) => jsonEncode(s.toJson()),
-      fromJson: (json) => Settings.fromJson(jsonDecode(json)),
-    ),
-  );
-  Settings get settings => settingsRM.state;
-  set settings(Settings _) => settingsRM.state = _;
+@riverpod
+class Settings extends _$Settings {
+  SettingsState build() => SettingsState();
   void setThemeMode(ThemeMode? _) {
-    settings = settings.copyWith(themeMode: _!);
+    state = state.copyWith(themeMode: _!);
   }
 
   void setNotesViewMode(NotesViewMode? _) {
-    settings = settings.copyWith(notesViewMode: _!);
+    state = state.copyWith(notesViewMode: _!);
   }
 
   void setMaterialColor(MaterialColor? value) {
-    settings = settings.copyWith(materialColor: value!);
+    state = state.copyWith(materialColor: value!);
   }
 
   void setDeletionDuration(Duration duration) {
-    settings = settings.copyWith(deleteAfter: duration);
+    state = state.copyWith(deleteAfter: duration);
   }
 }
 

@@ -6,6 +6,7 @@ class NotePage extends UI {
   final String id;
   @override
   Widget build(BuildContext context) {
+    final settingsState = ref.watch(settingsProvider);
     return NoteBuilder(
       noteID: id,
       builder: (Note note) {
@@ -23,7 +24,7 @@ class NotePage extends UI {
                         children: [
                           Divider(height: 0),
                           'ID'.text(),
-                          note.noteID.text(scale: .8),
+                          note.id.text(scale: .8),
                           Divider(height: 0),
                           'TITLE'.text(),
                           note.title.text(),
@@ -35,7 +36,7 @@ class NotePage extends UI {
                           note.isArchived.text(),
                           Divider(height: 0),
                           'IS DELETED'.text(),
-                          note.isDeleted.text(),
+                          note.isRemoved.text(),
                           Divider(height: 0),
                         ],
                       ).pad().pad(),
@@ -46,14 +47,17 @@ class NotePage extends UI {
               ),
               IconButton(
                 onPressed: () {
-                  notesManager.addNote(
-                    (_) => note.copyWith(editing: !note.editing),
+                  ref.watch(notePodProvider.notifier).addNote(
+                    (_) {
+                      return note.copyWith(editing: !note.editing);
+                    },
                   );
+                  ;
                 },
                 icon: Icon(note.editing ? Icons.done : Icons.edit),
               ).pad(
                 padding: EdgeInsets.only(
-                  right: settingsManager.settings.padding,
+                  right: settingsState.padding,
                 ),
               ),
             ],
@@ -64,9 +68,9 @@ class NotePage extends UI {
                   ? TextFormField(
                       initialValue: note.title,
                       onChanged: (value) {
-                        notesManager.addNote(
-                          (_) => note.copyWith(title: value),
-                        );
+                        ref.watch(notePodProvider.notifier).addNote(
+                              (_) => note.copyWith(title: value),
+                            );
                       },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide.none),
@@ -77,9 +81,9 @@ class NotePage extends UI {
                   ? TextFormField(
                       initialValue: note.description,
                       onChanged: (value) {
-                        notesManager.addNote(
-                          (_) => note.copyWith(description: value),
-                        );
+                        ref.watch(notePodProvider.notifier).addNote(
+                              (_) => note.copyWith(description: value),
+                            );
                       },
                       minLines: 10,
                       maxLines: 20,

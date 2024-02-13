@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Settings _$SettingsFromJson(Map<String, dynamic> json) {
+SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) {
   return _Settings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Settings {
+mixin _$SettingsState {
   ThemeMode get themeMode => throw _privateConstructorUsedError;
   @MaterialColorConverter()
   MaterialColor get materialColor => throw _privateConstructorUsedError;
@@ -29,14 +29,15 @@ mixin _$Settings {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SettingsCopyWith<Settings> get copyWith =>
+  $SettingsStateCopyWith<SettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SettingsCopyWith<$Res> {
-  factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
-      _$SettingsCopyWithImpl<$Res, Settings>;
+abstract class $SettingsStateCopyWith<$Res> {
+  factory $SettingsStateCopyWith(
+          SettingsState value, $Res Function(SettingsState) then) =
+      _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
   $Res call(
       {ThemeMode themeMode,
@@ -47,9 +48,9 @@ abstract class $SettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
-    implements $SettingsCopyWith<$Res> {
-  _$SettingsCopyWithImpl(this._value, this._then);
+class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
+    implements $SettingsStateCopyWith<$Res> {
+  _$SettingsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -92,7 +93,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
 
 /// @nodoc
 abstract class _$$SettingsImplCopyWith<$Res>
-    implements $SettingsCopyWith<$Res> {
+    implements $SettingsStateCopyWith<$Res> {
   factory _$$SettingsImplCopyWith(
           _$SettingsImpl value, $Res Function(_$SettingsImpl) then) =
       __$$SettingsImplCopyWithImpl<$Res>;
@@ -108,7 +109,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
 
 /// @nodoc
 class __$$SettingsImplCopyWithImpl<$Res>
-    extends _$SettingsCopyWithImpl<$Res, _$SettingsImpl>
+    extends _$SettingsStateCopyWithImpl<$Res, _$SettingsImpl>
     implements _$$SettingsImplCopyWith<$Res> {
   __$$SettingsImplCopyWithImpl(
       _$SettingsImpl _value, $Res Function(_$SettingsImpl) _then)
@@ -180,7 +181,7 @@ class _$SettingsImpl implements _Settings {
 
   @override
   String toString() {
-    return 'Settings(themeMode: $themeMode, materialColor: $materialColor, notesViewMode: $notesViewMode, deleteAfter: $deleteAfter, padding: $padding)';
+    return 'SettingsState(themeMode: $themeMode, materialColor: $materialColor, notesViewMode: $notesViewMode, deleteAfter: $deleteAfter, padding: $padding)';
   }
 
   @override
@@ -218,7 +219,7 @@ class _$SettingsImpl implements _Settings {
   }
 }
 
-abstract class _Settings implements Settings {
+abstract class _Settings implements SettingsState {
   const factory _Settings(
       {final ThemeMode themeMode,
       @MaterialColorConverter() final MaterialColor materialColor,

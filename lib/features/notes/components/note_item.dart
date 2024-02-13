@@ -14,7 +14,7 @@ class NoteItem extends UI {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => navigator.to(NotePage(id: note.noteID)),
+      onTap: () => navigator.to(NotePage(id: note.id)),
       child: Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Stack(
