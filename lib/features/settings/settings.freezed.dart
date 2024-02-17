@@ -20,9 +20,10 @@ SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SettingsState {
-  ThemeMode get themeMode => throw _privateConstructorUsedError;
-  @MaterialColorConverter()
-  MaterialColor get materialColor => throw _privateConstructorUsedError;
+  ThemeMode get themeMode =>
+      throw _privateConstructorUsedError; // @MaterialColorConverter()
+// @Default(Colors.blue)
+// final MaterialColor materialColor,
   NotesViewMode get notesViewMode => throw _privateConstructorUsedError;
   Duration get deleteAfter => throw _privateConstructorUsedError;
   double get padding => throw _privateConstructorUsedError;
@@ -41,7 +42,6 @@ abstract class $SettingsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {ThemeMode themeMode,
-      @MaterialColorConverter() MaterialColor materialColor,
       NotesViewMode notesViewMode,
       Duration deleteAfter,
       double padding});
@@ -61,7 +61,6 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   @override
   $Res call({
     Object? themeMode = null,
-    Object? materialColor = null,
     Object? notesViewMode = null,
     Object? deleteAfter = null,
     Object? padding = null,
@@ -71,10 +70,6 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
               as ThemeMode,
-      materialColor: null == materialColor
-          ? _value.materialColor
-          : materialColor // ignore: cast_nullable_to_non_nullable
-              as MaterialColor,
       notesViewMode: null == notesViewMode
           ? _value.notesViewMode
           : notesViewMode // ignore: cast_nullable_to_non_nullable
@@ -101,7 +96,6 @@ abstract class _$$SettingsImplCopyWith<$Res>
   @useResult
   $Res call(
       {ThemeMode themeMode,
-      @MaterialColorConverter() MaterialColor materialColor,
       NotesViewMode notesViewMode,
       Duration deleteAfter,
       double padding});
@@ -119,7 +113,6 @@ class __$$SettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? themeMode = null,
-    Object? materialColor = null,
     Object? notesViewMode = null,
     Object? deleteAfter = null,
     Object? padding = null,
@@ -129,10 +122,6 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
               as ThemeMode,
-      materialColor: null == materialColor
-          ? _value.materialColor
-          : materialColor // ignore: cast_nullable_to_non_nullable
-              as MaterialColor,
       notesViewMode: null == notesViewMode
           ? _value.notesViewMode
           : notesViewMode // ignore: cast_nullable_to_non_nullable
@@ -154,7 +143,6 @@ class __$$SettingsImplCopyWithImpl<$Res>
 class _$SettingsImpl implements _Settings {
   const _$SettingsImpl(
       {this.themeMode = ThemeMode.system,
-      @MaterialColorConverter() this.materialColor = Colors.blue,
       this.notesViewMode = NotesViewMode.list,
       this.deleteAfter = const Duration(days: 30),
       this.padding = 8.0});
@@ -165,10 +153,9 @@ class _$SettingsImpl implements _Settings {
   @override
   @JsonKey()
   final ThemeMode themeMode;
-  @override
-  @JsonKey()
-  @MaterialColorConverter()
-  final MaterialColor materialColor;
+// @MaterialColorConverter()
+// @Default(Colors.blue)
+// final MaterialColor materialColor,
   @override
   @JsonKey()
   final NotesViewMode notesViewMode;
@@ -181,7 +168,7 @@ class _$SettingsImpl implements _Settings {
 
   @override
   String toString() {
-    return 'SettingsState(themeMode: $themeMode, materialColor: $materialColor, notesViewMode: $notesViewMode, deleteAfter: $deleteAfter, padding: $padding)';
+    return 'SettingsState(themeMode: $themeMode, notesViewMode: $notesViewMode, deleteAfter: $deleteAfter, padding: $padding)';
   }
 
   @override
@@ -191,8 +178,6 @@ class _$SettingsImpl implements _Settings {
             other is _$SettingsImpl &&
             (identical(other.themeMode, themeMode) ||
                 other.themeMode == themeMode) &&
-            (identical(other.materialColor, materialColor) ||
-                other.materialColor == materialColor) &&
             (identical(other.notesViewMode, notesViewMode) ||
                 other.notesViewMode == notesViewMode) &&
             (identical(other.deleteAfter, deleteAfter) ||
@@ -202,8 +187,8 @@ class _$SettingsImpl implements _Settings {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, themeMode, materialColor,
-      notesViewMode, deleteAfter, padding);
+  int get hashCode =>
+      Object.hash(runtimeType, themeMode, notesViewMode, deleteAfter, padding);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +207,6 @@ class _$SettingsImpl implements _Settings {
 abstract class _Settings implements SettingsState {
   const factory _Settings(
       {final ThemeMode themeMode,
-      @MaterialColorConverter() final MaterialColor materialColor,
       final NotesViewMode notesViewMode,
       final Duration deleteAfter,
       final double padding}) = _$SettingsImpl;
@@ -232,10 +216,9 @@ abstract class _Settings implements SettingsState {
 
   @override
   ThemeMode get themeMode;
-  @override
-  @MaterialColorConverter()
-  MaterialColor get materialColor;
-  @override
+  @override // @MaterialColorConverter()
+// @Default(Colors.blue)
+// final MaterialColor materialColor,
   NotesViewMode get notesViewMode;
   @override
   Duration get deleteAfter;

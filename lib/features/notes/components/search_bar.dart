@@ -15,21 +15,20 @@ class SearchBarUI extends UI {
           width: 16,
         ),
         Expanded(
-          child: TextField(
-            decoration: InputDecoration(
-                border: UnderlineInputBorder(borderSide: BorderSide.none)),
-          ),
+          child: TextField(),
         ), // Text('Search your notes'),
         Spacer(),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: Icon(Icons.list_alt),
+          child: Icon(Icons.list),
         ),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: Icon(Icons.grid_view),
+          child: Icon(Icons.grid_4x4),
         ),
-        CircleAvatar(child: Icon(Icons.menu)),
+        CircleAvatar(
+          child: Icon(Icons.list),
+        ),
       ],
     );
   }

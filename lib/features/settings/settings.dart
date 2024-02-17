@@ -1,5 +1,3 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../../main.dart';
 
 part 'settings.g.dart';
@@ -11,9 +9,9 @@ enum NotesViewMode { list, grid }
 class SettingsState with _$SettingsState {
   const factory SettingsState({
     @Default(ThemeMode.system) final ThemeMode themeMode,
-    @MaterialColorConverter()
-    @Default(Colors.blue)
-    final MaterialColor materialColor,
+    // @MaterialColorConverter()
+    // @Default(Colors.blue)
+    // final MaterialColor materialColor,
     @Default(NotesViewMode.list) final NotesViewMode notesViewMode,
     @Default(const Duration(days: 30)) final Duration deleteAfter,
     @Default(8.0) final double padding,
@@ -22,9 +20,10 @@ class SettingsState with _$SettingsState {
   factory SettingsState.fromJson(json) => _$SettingsStateFromJson(json);
 }
 
-@riverpod
-class Settings extends _$Settings {
-  SettingsState build() => SettingsState();
+final settings = Settings();
+
+class Settings extends Manager<SettingsState> {
+  Settings() : super(SettingsState());
   void setThemeMode(ThemeMode? _) {
     state = state.copyWith(themeMode: _!);
   }
@@ -33,24 +32,24 @@ class Settings extends _$Settings {
     state = state.copyWith(notesViewMode: _!);
   }
 
-  void setMaterialColor(MaterialColor? value) {
-    state = state.copyWith(materialColor: value!);
-  }
+  // void setMaterialColor(MaterialColor? value) {
+  //   state = state.copyWith(materialColor: value!);
+  // }
 
   void setDeletionDuration(Duration duration) {
     state = state.copyWith(deleteAfter: duration);
   }
 }
 
-class MaterialColorConverter implements JsonConverter<MaterialColor, int> {
-  const MaterialColorConverter();
-  @override
-  int toJson(MaterialColor object) {
-    return Colors.primaries.indexOf(object);
-  }
+// class MaterialColorConverter implements JsonConverter<MaterialColor, int> {
+//   const MaterialColorConverter();
+//   @override
+//   int toJson(MaterialColor object) {
+//     return Colors.primaries.indexOf(object);
+//   }
 
-  @override
-  MaterialColor fromJson(int json) {
-    return Colors.primaries[json];
-  }
-}
+//   @override
+//   MaterialColor fromJson(int json) {
+//     return Colors.primaries[json];
+//   }
+// }

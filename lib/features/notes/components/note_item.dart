@@ -15,8 +15,7 @@ class NoteItem extends UI {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => navigator.to(NotePage(id: note.id)),
-      child: Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: GestureDetector(
         child: Stack(
           alignment: Alignment.center,
           children: [

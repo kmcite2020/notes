@@ -7,10 +7,10 @@ class ArchivesPage extends UI {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: SearchBar(),
-        actions: [],
-        toolbarHeight: 80,
-      ),
+          // title: (),
+          // actions: [],
+          // toolbarHeight: 80,
+          ),
       // body: ListView.builder(
       //   itemCount: notesManager.archivedNotes.length,
       //   itemBuilder: (context, index) =>

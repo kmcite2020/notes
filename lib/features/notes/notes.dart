@@ -1,5 +1,3 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../../main.dart';
 
 part 'notes.freezed.dart';
@@ -64,14 +62,12 @@ class Notes with _$Notes {
   factory Notes.fromJson(Map<String, dynamic> json) => _$NotesFromJson(json);
 }
 
-final titleRM = RM.injectTextEditing(autoDispose: false);
-final descriptionRM = RM.injectTextEditing(autoDispose: false);
+final titleRM = RM('');
+final descriptionRM = RM('');
 
-@riverpod
-class NotePod extends _$NotePod {
-  Notes build() => Notes();
+class NotePod extends Manager<Notes> {
+  NotePod() : super(Notes());
 
-  // Notes get getNotes => state;
   void setNotes(Notes Function(Notes notes) notesModifier) =>
       state = notesModifier(state);
 
