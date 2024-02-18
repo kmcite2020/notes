@@ -1,3 +1,5 @@
+import 'package:manager/state_manager/management/notifier.dart';
+
 import '../../main.dart';
 
 part 'settings.g.dart';
@@ -24,15 +26,12 @@ class SettingsState with _$SettingsState {
 final settingsRM = SettingsRM();
 
 class SettingsRM extends Notifier<SettingsState> {
-  SettingsRM()
-      : super(
-          SettingsState(),
-          persistor: Persistor(
-            key: 'settings',
-            toJson: (s) => s.toJson(),
-            fromJson: SettingsState.fromJson,
-          ),
-        );
+  @override
+  Persistor<SettingsState>? get persistor => Persistor(
+        key: 'settings',
+        toJson: (s) => s.toJson(),
+        fromJson: SettingsState.fromJson,
+      );
   void setThemeMode(ThemeMode? _) {
     state = state.copyWith(themeMode: _!);
   }
@@ -48,6 +47,9 @@ class SettingsRM extends Notifier<SettingsState> {
   void setDeletionDuration(Duration duration) {
     state = state.copyWith(deleteAfter: duration);
   }
+
+  @override
+  SettingsState get initialState => SettingsState();
 }
 
 // class MaterialColorConverter implements JsonConverter<MaterialColor, int> {

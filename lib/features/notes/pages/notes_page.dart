@@ -22,7 +22,7 @@ class NotesPage extends UI {
               },
               icon: const Icon(Icons.add_box_sharp),
             ).pad(
-              padding: const EdgeInsets.only(right: 8),
+              custom: const EdgeInsets.only(right: 8),
             ),
           ]
 

@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:manager/manager.dart';
 
-import 'core/navigator.dart';
-
-class DrawerBuilder extends ReactiveStatelessWidget {
+class DrawerBuilder extends UI {
   const DrawerBuilder({
     super.key,
   });
@@ -53,12 +50,12 @@ class DrawerBuilder extends ReactiveStatelessWidget {
   }
 }
 
-final indexRM = RM.inject(() => 0);
-set index(value) => indexRM.state = value;
+final indexRM = RM(() => 0);
+set index(value) => indexRM(value);
 void onDestinationSelected(i) {
   index = i;
-  navigator.back();
+  RM.back();
   print(i);
 }
 
-int get selectedIndex => indexRM.state;
+int get selectedIndex => indexRM();

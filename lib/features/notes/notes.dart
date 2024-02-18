@@ -1,3 +1,6 @@
+import 'package:manager/state_manager/management/cubit.dart';
+import 'package:manager/state_manager/management/simple.dart';
+
 import '../../main.dart';
 
 part 'notes.freezed.dart';
@@ -6,16 +9,18 @@ part 'notes.g.dart';
 final notesRM = NotesRM();
 
 class NotesRM extends Cubit<Notes> {
-  NotesRM()
-      : super(
-          Notes(),
-          persistor: Persistor(
-            key: 'notes',
-            toJson: (state) => state.toJson(),
-            fromJson: Notes.fromJson,
-          ),
-        );
+  NotesRM();
+  @override
+  Persistor<Notes>? get persistor {
+    return Persistor(
+      key: 'notes',
+      toJson: (state) => state.toJson(),
+      fromJson: Notes.fromJson,
+    );
+  }
 
+  @override
+  Notes get initialState => Notes();
   void addNote(Note note) {
     state = state.copyWith(
       cache: state.cache..add(note),
@@ -118,5 +123,5 @@ class Notes with _$Notes {
   factory Notes.fromJson(Map<String, dynamic> json) => _$NotesFromJson(json);
 }
 
-final titleRM = RM('');
-final descriptionRM = RM('');
+final titleRM = Simple('');
+final descriptionRM = Simple('');
