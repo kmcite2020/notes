@@ -12,7 +12,7 @@ part of 'notes.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Note _$NoteFromJson(Map<String, dynamic> json) {
   return _Note.fromJson(json);
@@ -388,7 +388,7 @@ Notes _$NotesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Notes {
-  Map<String, Note> get cache => throw _privateConstructorUsedError;
+  List<Note> get cache => throw _privateConstructorUsedError;
   String get query => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -401,7 +401,7 @@ abstract class $NotesCopyWith<$Res> {
   factory $NotesCopyWith(Notes value, $Res Function(Notes) then) =
       _$NotesCopyWithImpl<$Res, Notes>;
   @useResult
-  $Res call({Map<String, Note> cache, String query});
+  $Res call({List<Note> cache, String query});
 }
 
 /// @nodoc
@@ -424,7 +424,7 @@ class _$NotesCopyWithImpl<$Res, $Val extends Notes>
       cache: null == cache
           ? _value.cache
           : cache // ignore: cast_nullable_to_non_nullable
-              as Map<String, Note>,
+              as List<Note>,
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -440,7 +440,7 @@ abstract class _$$NotesImplCopyWith<$Res> implements $NotesCopyWith<$Res> {
       __$$NotesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, Note> cache, String query});
+  $Res call({List<Note> cache, String query});
 }
 
 /// @nodoc
@@ -461,7 +461,7 @@ class __$$NotesImplCopyWithImpl<$Res>
       cache: null == cache
           ? _value._cache
           : cache // ignore: cast_nullable_to_non_nullable
-              as Map<String, Note>,
+              as List<Note>,
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -473,21 +473,20 @@ class __$$NotesImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NotesImpl extends _Notes {
-  const _$NotesImpl(
-      {final Map<String, Note> cache = const <String, Note>{}, this.query = ''})
+  const _$NotesImpl({final List<Note> cache = const <Note>[], this.query = ''})
       : _cache = cache,
         super._();
 
   factory _$NotesImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotesImplFromJson(json);
 
-  final Map<String, Note> _cache;
+  final List<Note> _cache;
   @override
   @JsonKey()
-  Map<String, Note> get cache {
-    if (_cache is EqualUnmodifiableMapView) return _cache;
+  List<Note> get cache {
+    if (_cache is EqualUnmodifiableListView) return _cache;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_cache);
+    return EqualUnmodifiableListView(_cache);
   }
 
   @override
@@ -528,14 +527,14 @@ class _$NotesImpl extends _Notes {
 }
 
 abstract class _Notes extends Notes {
-  const factory _Notes({final Map<String, Note> cache, final String query}) =
+  const factory _Notes({final List<Note> cache, final String query}) =
       _$NotesImpl;
   const _Notes._() : super._();
 
   factory _Notes.fromJson(Map<String, dynamic> json) = _$NotesImpl.fromJson;
 
   @override
-  Map<String, Note> get cache;
+  List<Note> get cache;
   @override
   String get query;
   @override

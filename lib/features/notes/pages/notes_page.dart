@@ -7,10 +7,11 @@ class NotesPage extends UI {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          title: 'Notes'.text(),
           // toolbarHeight: 80,
           actions: [
             IconButton(
-              onPressed: () => navigator.to(SettingsPage()),
+              onPressed: () => RM.toPage(SettingsPage()),
               icon: const Icon(Icons.settings),
             ),
             IconButton(
@@ -30,6 +31,15 @@ class NotesPage extends UI {
           //   hintText: 'Search by Note\'s title.',
           // ),
           ),
+      body: ListView.builder(
+        itemCount: notesRM().cache.length,
+        itemBuilder: (context, index) {
+          final note = notesRM().cache[index];
+          return ListTile(
+            title: note.text(),
+          );
+        },
+      ),
       // body: switch (settingsState.notesViewMode) {
       //   NotesViewMode.grid => GridView.builder(
       //       itemCount: ref.watch(notePodProvider).query.isEmpty

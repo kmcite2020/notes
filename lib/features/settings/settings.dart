@@ -17,13 +17,22 @@ class SettingsState with _$SettingsState {
     @Default(8.0) final double padding,
   }) = _Settings;
 
-  factory SettingsState.fromJson(json) => _$SettingsStateFromJson(json);
+  factory SettingsState.fromJson(Map<String, dynamic> json) =>
+      _$SettingsStateFromJson(json);
 }
 
-final settings = Settings();
+final settingsRM = SettingsRM();
 
-class Settings extends Manager<SettingsState> {
-  Settings() : super(SettingsState());
+class SettingsRM extends Notifier<SettingsState> {
+  SettingsRM()
+      : super(
+          SettingsState(),
+          persistor: Persistor(
+            key: 'settings',
+            toJson: (s) => s.toJson(),
+            fromJson: SettingsState.fromJson,
+          ),
+        );
   void setThemeMode(ThemeMode? _) {
     state = state.copyWith(themeMode: _!);
   }

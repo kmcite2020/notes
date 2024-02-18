@@ -46,14 +46,10 @@ class NotesRepository {
     );
   }
 
-  Future updateNote(Note note) => databases
-          .updateDocument(
+  Future updateNote(Note note) => databases.updateDocument(
         databaseId: databaseId,
         collectionId: collectionId,
         documentId: note.id,
         data: note.toJson(),
-      )
-          .then((value) {
-        // return ref.invalidateSelf();
-      });
+      );
 }

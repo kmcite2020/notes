@@ -5,7 +5,28 @@ class SettingsPage extends UI {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: ListView(
+        children: [
+          DropdownButtonFormField(
+            value: settingsRM().themeMode,
+            items: ThemeMode.values
+                .map(
+                  (e) => DropdownMenuItem(
+                    value: e,
+                    child: e.name.toUpperCase().text(),
+                  ),
+                )
+                .toList(),
+            onChanged: settingsRM.setThemeMode,
+          ).pad(),
+          DropdownButtonFormField(
+            items: [],
+            onChanged: (_) {},
+          ).pad(),
+        ],
+      ),
+    );
     // return CupertinoApp(
     //   debugShowCheckedModeBanner: false,
     //   theme: CupertinoThemeData(

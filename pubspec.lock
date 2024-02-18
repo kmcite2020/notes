@@ -485,10 +485,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "220dfaf4de3ce713740d0729429f452ec5801bb2"
+      resolved-ref: "98985ceb12cdfd378dfd04c47ce166acca105162"
       url: "https://github.com/kmcite2020/manager"
     source: git
-    version: "1.0.0+1"
+    version: "1.0.0+4"
   matcher:
     dependency: transitive
     description:

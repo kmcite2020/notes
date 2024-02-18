@@ -3,6 +3,64 @@ import '../../main.dart';
 part 'notes.freezed.dart';
 part 'notes.g.dart';
 
+final notesRM = NotesRM();
+
+class NotesRM extends Cubit<Notes> {
+  NotesRM()
+      : super(
+          Notes(),
+          persistor: Persistor(
+            key: 'notes',
+            toJson: (state) => state.toJson(),
+            fromJson: Notes.fromJson,
+          ),
+        );
+
+  void addNote(Note note) {
+    state = state.copyWith(
+      cache: state.cache..add(note),
+    );
+  }
+
+  void removeNote(Note note) {
+    state = state.copyWith(
+      cache: state.cache..remove(note),
+    );
+  }
+
+  void setQuery(String query) => state = state.copyWith(query: query);
+}
+
+class NotesRepository {
+  static const databaseId = '';
+  static const collectionId = '';
+  Future<List<Note>> getNotes() async => databases.listDocuments(
+        databaseId: databaseId,
+        collectionId: collectionId,
+        queries: [
+          Query.limit(9999),
+        ],
+      ).then(
+        (value) => value.documents
+            .map(
+              (e) => Note.fromJson(e.data),
+            )
+            .toList(),
+      );
+  addNote(Note note) async => databases.createDocument(
+        databaseId: databaseId,
+        collectionId: collectionId,
+        documentId: note.id,
+        data: note.toJson(),
+      );
+
+  removeNote(Note note) => databases.deleteDocument(
+        databaseId: databaseId,
+        collectionId: collectionId,
+        documentId: note.id,
+      );
+}
+
 @freezed
 class Note with _$Note {
   const factory Note.raw({
@@ -23,28 +81,28 @@ class Note with _$Note {
 @freezed
 class Notes with _$Notes {
   const factory Notes({
-    @Default(<String, Note>{}) final Map<String, Note> cache,
+    @Default(<Note>[]) final List<Note> cache,
     @Default('') final String query,
   }) = _Notes;
   const Notes._();
-  List<Note> get allNotes => cache.values.toList();
-  List<Note> get removedNotes => cache.values.where(
+  List<Note> get allNotes => cache;
+  List<Note> get removedNotes => cache.where(
         (e) {
           return e.isRemoved;
         },
       ).toList();
-  List<Note> get archivedNotes => cache.values
+  List<Note> get archivedNotes => cache
       .where(
         (e) => e.isArchived,
       )
       .toList();
 
-  List<Note> get notes => cache.values
+  List<Note> get notes => cache
       .where(
         (element) => !element.isRemoved,
       )
       .toList();
-  List<Note> get queriedNotes => cache.values
+  List<Note> get queriedNotes => cache
       .where(
         (
           eachNote,
@@ -57,42 +115,8 @@ class Notes with _$Notes {
         (eachNote) => !eachNote.isRemoved,
       )
       .toList();
-  String get query => query;
-  Note id(String id) => cache[id] ?? Note().copyWith(id: '');
   factory Notes.fromJson(Map<String, dynamic> json) => _$NotesFromJson(json);
 }
 
 final titleRM = RM('');
 final descriptionRM = RM('');
-
-class NotePod extends Manager<Notes> {
-  NotePod() : super(Notes());
-
-  void setNotes(Notes Function(Notes notes) notesModifier) =>
-      state = notesModifier(state);
-
-  void addNote(Note Function(Note newNote) noteModifier) {
-    final note = noteModifier(Note());
-    setNotes(
-      (notes) => notes.copyWith(
-        cache: Map.of(notes.cache)..[note.id] = note,
-      ),
-    );
-  }
-
-  void removeNote(Note note) {
-    addNote(
-      (_) => note.copyWith(isRemoved: true),
-    );
-  }
-
-  void permanentlyRemoveNote(Note note) => setNotes(
-        (notes) => notes.copyWith(
-          cache: Map.of(notes.cache)..remove(note.id),
-        ),
-      );
-
-  void setQuery(String query) => setNotes(
-        (notes) => notes.copyWith(query: query),
-      );
-}

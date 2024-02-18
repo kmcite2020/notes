@@ -1,7 +1,5 @@
 import 'package:notes/main.dart';
 
-import '../pages/note_page.dart';
-
 class NoteItem extends UI {
   const NoteItem({
     super.key,
@@ -14,7 +12,9 @@ class NoteItem extends UI {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => navigator.to(NotePage(id: note.id)),
+      onTap: () {
+        // navigator.to(NotePage(id: note.id));
+      },
       child: GestureDetector(
         child: Stack(
           alignment: Alignment.center,
@@ -23,8 +23,8 @@ class NoteItem extends UI {
               child: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
-                  note.title.text(scale: 1.2).pad(),
-                  note.description.text(scale: 0.8).pad(),
+                  note.title.text(textScaleFactor: 1.2).pad(),
+                  note.description.text(textScaleFactor: 0.8).pad(),
                 ],
               ),
               height: 200,

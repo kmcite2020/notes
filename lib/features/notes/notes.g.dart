@@ -28,10 +28,8 @@ Map<String, dynamic> _$$NoteImplToJson(_$NoteImpl instance) =>
     };
 
 _$NotesImpl _$$NotesImplFromJson(Map<String, dynamic> json) => _$NotesImpl(
-      cache: (json['cache'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, Note.fromJson(e)),
-          ) ??
-          const <String, Note>{},
+      cache: (json['cache'] as List<dynamic>?)?.map(Note.fromJson).toList() ??
+          const <Note>[],
       query: json['query'] as String? ?? '',
     );
 

@@ -27,7 +27,7 @@ class SearchBarUI extends UI {
           child: Icon(Icons.grid_4x4),
         ),
         CircleAvatar(
-          child: Icon(Icons.list),
+          child: Icon(Icons.av_timer_sharp),
         ),
       ],
     );

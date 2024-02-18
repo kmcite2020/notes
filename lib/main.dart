@@ -45,21 +45,10 @@ class App extends UI {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigator.navigatorKey,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: 'NOTES'.text(),
-          actions: [
-            FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () {},
-            ).pad()
-          ],
-        ),
-        body: 'Hello'.text().center(),
-      ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: settingsRM().themeMode,
+      home: NotesPage(),
     );
   }
 }
