@@ -39,21 +39,3 @@ class RemovedNotesPage extends UI {
     );
   }
 }
-
-final trashManager = TrashManager();
-
-class TrashManager {
-  List<Note> build() => [];
-
-  // List<Note> get trashedNotes => state;
-
-  void permanentlyDeleteNote(Note note) {
-    // ref.watch(notePodProvider.notifier).permanentlyRemoveNote(note);
-  }
-
-  void undoRemoveNote(Note note) {
-    // ref.watch(notePodProvider.notifier).addNote(
-    //       (_) => note.copyWith(isRemoved: false),
-    //     );
-  }
-}

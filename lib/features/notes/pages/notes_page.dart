@@ -1,4 +1,5 @@
 import '../../../main.dart';
+import 'note_page.dart';
 
 class NotesPage extends UI {
   const NotesPage({super.key});
@@ -31,48 +32,55 @@ class NotesPage extends UI {
           //   hintText: 'Search by Note\'s title.',
           // ),
           ),
-      body: ListView.builder(
-        itemCount: notesRM().cache.length,
-        itemBuilder: (context, index) {
-          final note = notesRM().cache[index];
-          return ListTile(
-            title: note.text(),
-          );
-        },
+      body: RefreshIndicator(
+        onRefresh: () async => notesRM.getNotes(),
+        child: notesRM().loading
+            ? CircularProgressIndicator().center()
+            : switch (settingsRM().notesViewMode) {
+                NotesViewMode.list => ListView.builder(
+                    itemCount: notesRM().cache.length,
+                    itemBuilder: (context, index) {
+                      final note = notesRM().cache[index];
+                      return ListTile(
+                        title: note.text(),
+                        onTap: () => RM.toPage(
+                          NotePage(
+                            id: note.id,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                NotesViewMode.grid => GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: notesRM().cache.length,
+                    itemBuilder: (context, index) {
+                      final note = notesRM().cache[index];
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(settingsRM().borderRadius),
+                          border: Border.all(),
+                        ),
+                        child: ListTile(
+                          title: note.title.text(),
+                          subtitle: note.description.text(),
+                          onTap: () => RM.toPage(
+                            NotePage(id: note.id),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              settingsRM().borderRadius,
+                            ),
+                          ),
+                        ),
+                      ).pad();
+                    },
+                  ),
+              },
       ),
-      // body: switch (settingsState.notesViewMode) {
-      //   NotesViewMode.grid => GridView.builder(
-      //       itemCount: ref.watch(notePodProvider).query.isEmpty
-      //           ? ref.watch(notePodProvider).notes.length
-      //           : ref.watch(notePodProvider).queriedNotes.length,
-      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //         crossAxisCount: 2,
-      //       ),
-      //       itemBuilder: (context, index) {
-      //         final note = ref.watch(notePodProvider).query.isEmpty
-      //             ? ref.watch(notePodProvider).notes[index]
-      //             : ref.watch(notePodProvider).queriedNotes[index];
-      //         return NoteItem(
-      //           note: note,
-      //           onNoteDeleted: ref.watch(notePodProvider.notifier).removeNote,
-      //         );
-      //       },
-      //     ),
-      //   NotesViewMode.list => ListView.builder(
-      //       itemCount: ref.watch(notePodProvider).query.isEmpty
-      //           ? ref.watch(notePodProvider).notes.length
-      //           : ref.watch(notePodProvider).queriedNotes.length,
-      //       itemBuilder: (context, index) {
-      //         final note = ref.watch(notePodProvider).query.isEmpty
-      //             ? ref.watch(notePodProvider).notes[index]
-      //             : ref.watch(notePodProvider).queriedNotes[index];
-      //         return NoteItem(
-      //           note: note,
-      //           onNoteDeleted: ref.watch(notePodProvider.notifier).removeNote,
-      //         );
-      //       },
-      //     ),
-      // },
     );
   }
 }

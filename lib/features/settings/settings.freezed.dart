@@ -27,6 +27,7 @@ mixin _$SettingsState {
   NotesViewMode get notesViewMode => throw _privateConstructorUsedError;
   Duration get deleteAfter => throw _privateConstructorUsedError;
   double get padding => throw _privateConstructorUsedError;
+  double get borderRadius => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,8 @@ abstract class $SettingsStateCopyWith<$Res> {
       {ThemeMode themeMode,
       NotesViewMode notesViewMode,
       Duration deleteAfter,
-      double padding});
+      double padding,
+      double borderRadius});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     Object? notesViewMode = null,
     Object? deleteAfter = null,
     Object? padding = null,
+    Object? borderRadius = null,
   }) {
     return _then(_value.copyWith(
       themeMode: null == themeMode
@@ -82,6 +85,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.padding
           : padding // ignore: cast_nullable_to_non_nullable
               as double,
+      borderRadius: null == borderRadius
+          ? _value.borderRadius
+          : borderRadius // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$SettingsImplCopyWith<$Res>
       {ThemeMode themeMode,
       NotesViewMode notesViewMode,
       Duration deleteAfter,
-      double padding});
+      double padding,
+      double borderRadius});
 }
 
 /// @nodoc
@@ -116,6 +124,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? notesViewMode = null,
     Object? deleteAfter = null,
     Object? padding = null,
+    Object? borderRadius = null,
   }) {
     return _then(_$SettingsImpl(
       themeMode: null == themeMode
@@ -134,6 +143,10 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.padding
           : padding // ignore: cast_nullable_to_non_nullable
               as double,
+      borderRadius: null == borderRadius
+          ? _value.borderRadius
+          : borderRadius // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -145,7 +158,8 @@ class _$SettingsImpl implements _Settings {
       {this.themeMode = ThemeMode.system,
       this.notesViewMode = NotesViewMode.list,
       this.deleteAfter = const Duration(days: 30),
-      this.padding = 8.0});
+      this.padding = 8.0,
+      this.borderRadius = 8.0});
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsImplFromJson(json);
@@ -165,10 +179,13 @@ class _$SettingsImpl implements _Settings {
   @override
   @JsonKey()
   final double padding;
+  @override
+  @JsonKey()
+  final double borderRadius;
 
   @override
   String toString() {
-    return 'SettingsState(themeMode: $themeMode, notesViewMode: $notesViewMode, deleteAfter: $deleteAfter, padding: $padding)';
+    return 'SettingsState(themeMode: $themeMode, notesViewMode: $notesViewMode, deleteAfter: $deleteAfter, padding: $padding, borderRadius: $borderRadius)';
   }
 
   @override
@@ -182,13 +199,15 @@ class _$SettingsImpl implements _Settings {
                 other.notesViewMode == notesViewMode) &&
             (identical(other.deleteAfter, deleteAfter) ||
                 other.deleteAfter == deleteAfter) &&
-            (identical(other.padding, padding) || other.padding == padding));
+            (identical(other.padding, padding) || other.padding == padding) &&
+            (identical(other.borderRadius, borderRadius) ||
+                other.borderRadius == borderRadius));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, themeMode, notesViewMode, deleteAfter, padding);
+  int get hashCode => Object.hash(runtimeType, themeMode, notesViewMode,
+      deleteAfter, padding, borderRadius);
 
   @JsonKey(ignore: true)
   @override
@@ -209,7 +228,8 @@ abstract class _Settings implements SettingsState {
       {final ThemeMode themeMode,
       final NotesViewMode notesViewMode,
       final Duration deleteAfter,
-      final double padding}) = _$SettingsImpl;
+      final double padding,
+      final double borderRadius}) = _$SettingsImpl;
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
       _$SettingsImpl.fromJson;
@@ -224,6 +244,8 @@ abstract class _Settings implements SettingsState {
   Duration get deleteAfter;
   @override
   double get padding;
+  @override
+  double get borderRadius;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>

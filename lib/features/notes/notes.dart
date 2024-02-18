@@ -1,12 +1,13 @@
 import 'package:manager/state_manager/management/cubit.dart';
 import 'package:manager/state_manager/management/simple.dart';
+import 'package:notes/features/notes/notes_repository.dart';
 
 import '../../main.dart';
 
 part 'notes.freezed.dart';
 part 'notes.g.dart';
 
-final notesRM = NotesRM();
+final notesRM = NotesRM()..getNotes();
 
 class NotesRM extends Cubit<Notes> {
   NotesRM();
@@ -20,50 +21,45 @@ class NotesRM extends Cubit<Notes> {
   }
 
   @override
-  Notes get initialState => Notes();
-  void addNote(Note note) {
-    state = state.copyWith(
-      cache: state.cache..add(note),
+  Notes get initialState {
+    return Notes();
+  }
+
+  void getNotes() async {
+    this(
+      this().copyWith(loading: true),
+    );
+    this(
+      this().copyWith(
+        cache: await notesRepository.getAllNotes().catchError(
+              (_) => <Note>[],
+            ),
+      ),
+    );
+    this(
+      this().copyWith(
+        loading: false,
+      ),
     );
   }
 
-  void removeNote(Note note) {
-    state = state.copyWith(
-      cache: state.cache..remove(note),
+  void addNote(Note note) async {
+    this(
+      this().copyWith(loading: true),
     );
+    await notesRepository.addNote(note);
+    getNotes();
+  }
+
+  void removeNote(Note note) async {
+    this(
+      this().copyWith(loading: true),
+    );
+    await notesRepository.removeNote(note);
+    getNotes();
   }
 
   void setQuery(String query) => state = state.copyWith(query: query);
-}
-
-class NotesRepository {
-  static const databaseId = '';
-  static const collectionId = '';
-  Future<List<Note>> getNotes() async => databases.listDocuments(
-        databaseId: databaseId,
-        collectionId: collectionId,
-        queries: [
-          Query.limit(9999),
-        ],
-      ).then(
-        (value) => value.documents
-            .map(
-              (e) => Note.fromJson(e.data),
-            )
-            .toList(),
-      );
-  addNote(Note note) async => databases.createDocument(
-        databaseId: databaseId,
-        collectionId: collectionId,
-        documentId: note.id,
-        data: note.toJson(),
-      );
-
-  removeNote(Note note) => databases.deleteDocument(
-        databaseId: databaseId,
-        collectionId: collectionId,
-        documentId: note.id,
-      );
 }
 
 @freezed
@@ -88,6 +84,7 @@ class Notes with _$Notes {
   const factory Notes({
     @Default(<Note>[]) final List<Note> cache,
     @Default('') final String query,
+    @Default(true) final bool loading,
   }) = _Notes;
   const Notes._();
   List<Note> get allNotes => cache;

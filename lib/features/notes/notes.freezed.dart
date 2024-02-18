@@ -390,6 +390,7 @@ Notes _$NotesFromJson(Map<String, dynamic> json) {
 mixin _$Notes {
   List<Note> get cache => throw _privateConstructorUsedError;
   String get query => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -401,7 +402,7 @@ abstract class $NotesCopyWith<$Res> {
   factory $NotesCopyWith(Notes value, $Res Function(Notes) then) =
       _$NotesCopyWithImpl<$Res, Notes>;
   @useResult
-  $Res call({List<Note> cache, String query});
+  $Res call({List<Note> cache, String query, bool loading});
 }
 
 /// @nodoc
@@ -419,6 +420,7 @@ class _$NotesCopyWithImpl<$Res, $Val extends Notes>
   $Res call({
     Object? cache = null,
     Object? query = null,
+    Object? loading = null,
   }) {
     return _then(_value.copyWith(
       cache: null == cache
@@ -429,6 +431,10 @@ class _$NotesCopyWithImpl<$Res, $Val extends Notes>
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -440,7 +446,7 @@ abstract class _$$NotesImplCopyWith<$Res> implements $NotesCopyWith<$Res> {
       __$$NotesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Note> cache, String query});
+  $Res call({List<Note> cache, String query, bool loading});
 }
 
 /// @nodoc
@@ -456,6 +462,7 @@ class __$$NotesImplCopyWithImpl<$Res>
   $Res call({
     Object? cache = null,
     Object? query = null,
+    Object? loading = null,
   }) {
     return _then(_$NotesImpl(
       cache: null == cache
@@ -466,6 +473,10 @@ class __$$NotesImplCopyWithImpl<$Res>
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -473,7 +484,10 @@ class __$$NotesImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NotesImpl extends _Notes {
-  const _$NotesImpl({final List<Note> cache = const <Note>[], this.query = ''})
+  const _$NotesImpl(
+      {final List<Note> cache = const <Note>[],
+      this.query = '',
+      this.loading = true})
       : _cache = cache,
         super._();
 
@@ -492,10 +506,13 @@ class _$NotesImpl extends _Notes {
   @override
   @JsonKey()
   final String query;
+  @override
+  @JsonKey()
+  final bool loading;
 
   @override
   String toString() {
-    return 'Notes(cache: $cache, query: $query)';
+    return 'Notes(cache: $cache, query: $query, loading: $loading)';
   }
 
   @override
@@ -504,13 +521,14 @@ class _$NotesImpl extends _Notes {
         (other.runtimeType == runtimeType &&
             other is _$NotesImpl &&
             const DeepCollectionEquality().equals(other._cache, _cache) &&
-            (identical(other.query, query) || other.query == query));
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.loading, loading) || other.loading == loading));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_cache), query);
+      runtimeType, const DeepCollectionEquality().hash(_cache), query, loading);
 
   @JsonKey(ignore: true)
   @override
@@ -527,8 +545,10 @@ class _$NotesImpl extends _Notes {
 }
 
 abstract class _Notes extends Notes {
-  const factory _Notes({final List<Note> cache, final String query}) =
-      _$NotesImpl;
+  const factory _Notes(
+      {final List<Note> cache,
+      final String query,
+      final bool loading}) = _$NotesImpl;
   const _Notes._() : super._();
 
   factory _Notes.fromJson(Map<String, dynamic> json) = _$NotesImpl.fromJson;
@@ -537,6 +557,8 @@ abstract class _Notes extends Notes {
   List<Note> get cache;
   @override
   String get query;
+  @override
+  bool get loading;
   @override
   @JsonKey(ignore: true)
   _$$NotesImplCopyWith<_$NotesImpl> get copyWith =>

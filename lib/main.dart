@@ -3,14 +3,13 @@ export 'package:manager/manager.dart' hide Locale;
 import 'package:notes/main.dart';
 export 'package:manager/state_manager/ui/ui.dart';
 export 'package:flutter/material.dart' hide Locale, State;
-
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 export 'dart:convert';
 export 'dart:io';
 export 'package:colornames/colornames.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:notes/features/core/injections.dart';
-export 'package:notes/features/home.dart';
 export 'package:notes/features/notes/notes.dart';
 export 'package:notes/features/settings/settings.dart';
 export 'package:path_provider/path_provider.dart';
@@ -40,8 +39,18 @@ class App extends UI {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: RM.navigatorKey,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: FlexThemeData.light(
+        useMaterial3: true,
+        subThemesData: FlexSubThemesData(
+          defaultRadius: settingsRM().borderRadius,
+        ),
+      ),
+      darkTheme: FlexThemeData.dark(
+        useMaterial3: true,
+        subThemesData: FlexSubThemesData(
+          defaultRadius: settingsRM().borderRadius,
+        ),
+      ),
       themeMode: settingsRM().themeMode,
       home: NotesPage(),
     );

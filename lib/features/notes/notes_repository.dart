@@ -1,22 +1,27 @@
 import '../../main.dart';
 
+final notesRepository = NotesRepository();
+
 class NotesRepository {
   static const databaseId = '65bf16ef54994dc50176';
   static const collectionId = '65bf16f8e10c8eaba75a';
 
   Future<List<Note>> getAllNotes() {
-    return databases
-        .listDocuments(
-          databaseId: databaseId,
-          collectionId: collectionId,
-        )
-        .then(
-          (documentList) => documentList.documents
-              .map(
-                (eachDocument) => Note.fromJson(eachDocument.data),
-              )
-              .toList(),
-        );
+    return databases.listDocuments(
+      databaseId: databaseId,
+      collectionId: collectionId,
+      queries: [
+        Query.limit(9999),
+      ],
+    ).then(
+      (documentList) {
+        return documentList.documents.map(
+          (eachDocument) {
+            return Note.fromJson(eachDocument.data);
+          },
+        ).toList();
+      },
+    );
   }
 
   Future<Note> addNote(Note note) {
@@ -46,10 +51,12 @@ class NotesRepository {
     );
   }
 
-  Future updateNote(Note note) => databases.updateDocument(
-        databaseId: databaseId,
-        collectionId: collectionId,
-        documentId: note.id,
-        data: note.toJson(),
-      );
+  Future updateNote(Note note) {
+    return databases.updateDocument(
+      databaseId: databaseId,
+      collectionId: collectionId,
+      documentId: note.id,
+      data: note.toJson(),
+    );
+  }
 }

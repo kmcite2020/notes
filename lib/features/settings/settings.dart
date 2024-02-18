@@ -17,6 +17,7 @@ class SettingsState with _$SettingsState {
     @Default(NotesViewMode.list) final NotesViewMode notesViewMode,
     @Default(const Duration(days: 30)) final Duration deleteAfter,
     @Default(8.0) final double padding,
+    @Default(8.0) final double borderRadius,
   }) = _Settings;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
@@ -27,29 +28,22 @@ final settingsRM = SettingsRM();
 
 class SettingsRM extends Notifier<SettingsState> {
   @override
-  Persistor<SettingsState>? get persistor => Persistor(
-        key: 'settings',
-        toJson: (s) => s.toJson(),
-        fromJson: SettingsState.fromJson,
-      );
-  void setThemeMode(ThemeMode? _) {
-    state = state.copyWith(themeMode: _!);
-  }
-
-  void setNotesViewMode(NotesViewMode? _) {
-    state = state.copyWith(notesViewMode: _!);
-  }
-
-  // void setMaterialColor(MaterialColor? value) {
-  //   state = state.copyWith(materialColor: value!);
-  // }
-
-  void setDeletionDuration(Duration duration) {
-    state = state.copyWith(deleteAfter: duration);
-  }
-
-  @override
   SettingsState get initialState => SettingsState();
+  void setThemeMode(ThemeMode? _) => state = state.copyWith(themeMode: _!);
+
+  void setNotesViewMode(NotesViewMode? _) =>
+      state = state.copyWith(notesViewMode: _!);
+
+  void setDeletionDuration(Duration duration) =>
+      state = state.copyWith(deleteAfter: duration);
+  @override
+  Persistor<SettingsState>? get persistor {
+    return Persistor(
+      key: 'settings',
+      toJson: (s) => s.toJson(),
+      fromJson: SettingsState.fromJson,
+    );
+  }
 }
 
 // class MaterialColorConverter implements JsonConverter<MaterialColor, int> {

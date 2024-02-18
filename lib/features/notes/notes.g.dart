@@ -31,10 +31,12 @@ _$NotesImpl _$$NotesImplFromJson(Map<String, dynamic> json) => _$NotesImpl(
       cache: (json['cache'] as List<dynamic>?)?.map(Note.fromJson).toList() ??
           const <Note>[],
       query: json['query'] as String? ?? '',
+      loading: json['loading'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$NotesImplToJson(_$NotesImpl instance) =>
     <String, dynamic>{
       'cache': instance.cache,
       'query': instance.query,
+      'loading': instance.loading,
     };

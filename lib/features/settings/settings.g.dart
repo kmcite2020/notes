@@ -17,6 +17,7 @@ _$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
           ? const Duration(days: 30)
           : Duration(microseconds: json['deleteAfter'] as int),
       padding: (json['padding'] as num?)?.toDouble() ?? 8.0,
+      borderRadius: (json['borderRadius'] as num?)?.toDouble() ?? 8.0,
     );
 
 Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
       'notesViewMode': _$NotesViewModeEnumMap[instance.notesViewMode]!,
       'deleteAfter': instance.deleteAfter.inMicroseconds,
       'padding': instance.padding,
+      'borderRadius': instance.borderRadius,
     };
 
 const _$ThemeModeEnumMap = {
