@@ -19,6 +19,8 @@ dependencies:
   json_annotation: ^4.8.1
   freezed_annotation: ^2.4.1
   appwrite: ^11.0.1
+  isar: ^4.0.0-dev.14
+  isar_flutter_libs: ^4.0.0-dev.14
   manager:
     git: https://github.com/kmcite2020/manager
 dev_dependencies:
