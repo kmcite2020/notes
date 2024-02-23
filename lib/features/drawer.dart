@@ -1,4 +1,4 @@
-import 'package:manager/manager.dart';
+import '../main.dart';
 
 class DrawerBuilder extends UI {
   const DrawerBuilder({
@@ -50,11 +50,11 @@ class DrawerBuilder extends UI {
   }
 }
 
-final indexRM = RM(() => 0);
+final indexRM = RM(0);
 set index(value) => indexRM(value);
 void onDestinationSelected(i) {
   index = i;
-  RM.back();
+  RM.navigate.back();
   print(i);
 }
 

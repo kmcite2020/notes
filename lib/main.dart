@@ -7,7 +7,6 @@ export 'dart:io';
 export 'package:colornames/colornames.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:hive_flutter/hive_flutter.dart';
-export 'package:notes/features/core/injections.dart';
 export 'package:notes/features/notes/notes.dart';
 export 'package:notes/features/settings/settings.dart';
 export 'package:path_provider/path_provider.dart';
@@ -21,7 +20,7 @@ export 'package:notes/features/reminders.dart';
 export 'package:notes/features/settings/settings_page.dart';
 export 'package:notes/features/removed_notes_page.dart';
 
-import 'package:states_rebuilder/states_rebuilder.dart' as sm;
+import 'package:states_rebuilder/states_rebuilder.dart' as rebuilder;
 
 final client = Client()
   ..setEndpoint('https://cloud.appwrite.io/v1')
@@ -38,17 +37,17 @@ class App extends UI {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey: sm.RM.navigate.navigatorKey,
+      navigatorKey: rebuilder.RM.navigate.navigatorKey,
       theme: FlexThemeData.light(
         useMaterial3: true,
         subThemesData: FlexSubThemesData(
-          defaultRadius: settingsRM.borderRadius,
+          defaultRadius: settingsRM.borderRadius(),
         ),
       ),
       darkTheme: FlexThemeData.dark(
         useMaterial3: true,
         subThemesData: FlexSubThemesData(
-          defaultRadius: settingsRM.borderRadius,
+          defaultRadius: settingsRM.borderRadius(),
         ),
       ),
       themeMode: settingsRM.themeMode(),

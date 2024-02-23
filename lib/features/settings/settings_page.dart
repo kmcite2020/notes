@@ -36,12 +36,12 @@ class SettingsPage extends UI {
             onChanged: settingsRM.notesViewMode.call,
           ).pad(),
           ElevatedButton(
-            onPressed: notesRM().loading
+            onPressed: notesRM.state.loading
                 ? null
                 : () {
                     notesRM.getNotes();
                   },
-            child: notesRM().loading
+            child: notesRM.state.loading
                 ? CircularProgressIndicator().pad()
                 : 'Synchronize State'.text().pad(),
           ).pad()

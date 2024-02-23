@@ -14,7 +14,7 @@ class NotesPage extends UI {
           // toolbarHeight: 80,
           actions: [
             IconButton(
-              onPressed: () => RM.toPage(SettingsPage()),
+              onPressed: () => RM.navigate.to(SettingsPage()),
               icon: const Icon(Icons.settings),
             ),
             IconButton(
@@ -25,7 +25,7 @@ class NotesPage extends UI {
               },
               icon: const Icon(Icons.add_box_sharp),
             ).pad(
-              custom: const EdgeInsets.only(right: 8),
+              customPad: const EdgeInsets.only(right: 8),
             ),
           ]
 
@@ -36,16 +36,16 @@ class NotesPage extends UI {
           ),
       body: RefreshIndicator(
         onRefresh: () async => notesRM.getNotes(),
-        child: notesRM().loading
+        child: notesRM.state.loading
             ? CircularProgressIndicator().center()
-            : switch (settingsRM().notesViewMode) {
+            : switch (settingsRM.notesViewMode()) {
                 NotesViewMode.list => ListView.builder(
-                    itemCount: notesRM().cache.length,
+                    itemCount: notesRM.state.cache.length,
                     itemBuilder: (context, index) {
-                      final note = notesRM().cache[index];
+                      final note = notesRM.state.cache[index];
                       return ListTile(
                         title: note.text(),
-                        onTap: () => RM.toPage(
+                        onTap: () => RM.navigate.to(
                           NotePage(
                             id: note.id,
                           ),
@@ -57,24 +57,24 @@ class NotesPage extends UI {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                     ),
-                    itemCount: notesRM().cache.length,
+                    itemCount: notesRM.state.cache.length,
                     itemBuilder: (context, index) {
-                      final note = notesRM().cache[index];
+                      final note = notesRM.state.cache[index];
                       return Container(
                         decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(settingsRM().borderRadius),
+                              BorderRadius.circular(settingsRM.borderRadius()),
                           border: Border.all(),
                         ),
                         child: ListTile(
                           title: note.title.text(),
                           subtitle: note.description.text(),
-                          onTap: () => RM.toPage(
+                          onTap: () => RM.navigate.to(
                             NotePage(id: note.id),
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                              settingsRM().borderRadius,
+                              settingsRM.borderRadius(),
                             ),
                           ),
                         ),

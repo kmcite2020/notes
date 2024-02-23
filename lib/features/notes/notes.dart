@@ -1,5 +1,4 @@
-import 'package:manager/state_manager/management/cubit.dart';
-import 'package:manager/state_manager/management/simple.dart';
+import 'package:extensions/extensions.dart';
 import 'package:notes/features/notes/notes_repository.dart';
 
 import '../../main.dart';
@@ -12,49 +11,35 @@ final notesRM = NotesRM()..getNotes();
 class NotesRM extends Cubit<Notes> {
   NotesRM();
   @override
-  Persistor<Notes>? get persistor {
-    return Persistor(
-      key: 'notes',
-      toJson: (state) => state.toJson(),
-      fromJson: Notes.fromJson,
-    );
-  }
+  Persistor<Notes>? get persistor => Persistor(
+        key: 'notes',
+        toJson: (state) => state.toJson(),
+        fromJson: Notes.fromJson,
+      );
 
   @override
-  Notes get initialState {
-    return Notes();
-  }
+  Notes get initialState => Notes();
 
   void getNotes() async {
-    this(
-      this().copyWith(loading: true),
-    );
-    this(
-      this().copyWith(
-        cache: await notesRepository.getAllNotes().catchError(
-              (_) => <Note>[],
-            ),
+    state = state.copyWith(loading: true);
+    state = state.copyWith(
+      cache: await notesRepository.getAllNotes().catchError(
+        (_) {
+          return <Note>[];
+        },
       ),
     );
-    this(
-      this().copyWith(
-        loading: false,
-      ),
-    );
+    state = state.copyWith(loading: false);
   }
 
   void addNote(Note note) async {
-    this(
-      this().copyWith(loading: true),
-    );
+    state = state.copyWith(loading: true);
     await notesRepository.addNote(note);
     getNotes();
   }
 
   void removeNote(Note note) async {
-    this(
-      this().copyWith(loading: true),
-    );
+    state = state.copyWith(loading: true);
     await notesRepository.removeNote(note);
     getNotes();
   }
@@ -120,5 +105,5 @@ class Notes with _$Notes {
   factory Notes.fromJson(Map<String, dynamic> json) => _$NotesFromJson(json);
 }
 
-final titleRM = Simple('');
-final descriptionRM = Simple('');
+final titleRM = RM('');
+final descriptionRM = RM('');

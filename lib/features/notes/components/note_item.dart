@@ -1,3 +1,4 @@
+import 'package:extensions/extensions.dart';
 import 'package:notes/main.dart';
 
 class NoteItem extends UI {

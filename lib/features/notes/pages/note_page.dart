@@ -1,3 +1,5 @@
+import 'package:extensions/extensions.dart';
+
 import '../../../main.dart';
 
 class NotePage extends UI {
@@ -14,7 +16,7 @@ class NotePage extends UI {
             actions: [
               IconButton(
                 onPressed: () {
-                  navigator.toDialog(
+                  RM.navigate.toDialog(
                     Dialog(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -53,8 +55,8 @@ class NotePage extends UI {
                 },
                 icon: Icon(note.editing ? Icons.flutter_dash : Icons.edit),
               ).pad(
-                custom: EdgeInsets.only(
-                  right: settingsRM().padding,
+                customPad: EdgeInsets.only(
+                  right: settingsRM.padding(),
                 ),
               ),
             ],
@@ -108,7 +110,7 @@ class NoteBuilder extends UI {
   });
   @override
   Widget build(BuildContext context) {
-    final note = notesRM().cache.firstWhere((element) => element.id == id);
+    final note = notesRM.state.cache.firstWhere((element) => element.id == id);
     return builder(note);
   }
 }

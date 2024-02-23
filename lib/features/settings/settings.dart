@@ -25,7 +25,7 @@ class SettingsState with _$SettingsState {
 final settingsRM = SettingsRM();
 
 class SettingsRM {
-  final state = RM(() => SettingsState());
+  final state = RM(SettingsState());
   ThemeMode themeMode([ThemeMode? _themeMode]) {
     if (_themeMode != null) {
       state(
@@ -51,6 +51,24 @@ class SettingsRM {
       );
     }
     return state().deleteAfter;
+  }
+
+  double borderRadius([double? _borderRadius]) {
+    if (_borderRadius != null) {
+      state(
+        state().copyWith(borderRadius: _borderRadius),
+      );
+    }
+    return state().borderRadius;
+  }
+
+  double padding([double? _padding]) {
+    if (_padding != null) {
+      state(
+        state().copyWith(padding: _padding),
+      );
+    }
+    return state().padding;
   }
 
   // @override
