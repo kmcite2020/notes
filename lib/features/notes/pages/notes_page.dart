@@ -1,3 +1,5 @@
+import 'package:extensions/extensions.dart';
+
 import '../../../main.dart';
 import 'note_page.dart';
 

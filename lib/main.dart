@@ -15,11 +15,13 @@ export 'package:notes/features/notes/components/note_item.dart';
 export 'package:notes/features/archives.dart';
 export 'package:notes/features/drawer.dart';
 export 'package:notes/features/feedback.dart';
-import 'package:manager/manager.dart';
+export 'package:manager/manager.dart';
 export 'package:notes/features/notes/pages/notes_page.dart';
 export 'package:notes/features/reminders.dart';
 export 'package:notes/features/settings/settings_page.dart';
 export 'package:notes/features/removed_notes_page.dart';
+
+import 'package:states_rebuilder/states_rebuilder.dart' as sm;
 
 final client = Client()
   ..setEndpoint('https://cloud.appwrite.io/v1')
@@ -27,7 +29,7 @@ final client = Client()
 
 final databases = Databases(client);
 
-void main() => RM.runApp(App());
+void main() => RM.build(App());
 
 class App extends UI {
   const App({super.key});
@@ -36,20 +38,20 @@ class App extends UI {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey: RM.navigatorKey,
+      navigatorKey: sm.RM.navigate.navigatorKey,
       theme: FlexThemeData.light(
         useMaterial3: true,
         subThemesData: FlexSubThemesData(
-          defaultRadius: settingsRM().borderRadius,
+          defaultRadius: settingsRM.borderRadius,
         ),
       ),
       darkTheme: FlexThemeData.dark(
         useMaterial3: true,
         subThemesData: FlexSubThemesData(
-          defaultRadius: settingsRM().borderRadius,
+          defaultRadius: settingsRM.borderRadius,
         ),
       ),
-      themeMode: settingsRM().themeMode,
+      themeMode: settingsRM.themeMode(),
       home: NotesPage(),
     );
   }

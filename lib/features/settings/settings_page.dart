@@ -1,3 +1,5 @@
+import 'package:extensions/extensions.dart';
+
 import '../../main.dart';
 
 class SettingsPage extends UI {
@@ -10,7 +12,7 @@ class SettingsPage extends UI {
       body: ListView(
         children: [
           DropdownButtonFormField(
-            value: settingsRM().themeMode,
+            value: settingsRM.themeMode(),
             items: ThemeMode.values
                 .map(
                   (e) => DropdownMenuItem(
@@ -19,10 +21,10 @@ class SettingsPage extends UI {
                   ),
                 )
                 .toList(),
-            onChanged: settingsRM.setThemeMode,
+            onChanged: settingsRM.themeMode.call,
           ).pad(),
           DropdownButtonFormField(
-            value: settingsRM().notesViewMode,
+            value: settingsRM.notesViewMode(),
             items: NotesViewMode.values
                 .map(
                   (e) => DropdownMenuItem(
@@ -31,7 +33,7 @@ class SettingsPage extends UI {
                   ),
                 )
                 .toList(),
-            onChanged: settingsRM.setNotesViewMode,
+            onChanged: settingsRM.notesViewMode.call,
           ).pad(),
           ElevatedButton(
             onPressed: notesRM().loading

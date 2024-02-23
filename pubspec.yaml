@@ -21,7 +21,10 @@ dependencies:
   appwrite: ^11.0.1
   isar: ^4.0.0-dev.14
   isar_flutter_libs: ^4.0.0-dev.14
-  manager: ^0.4.1
+  manager:
+    path: D://FLUTTER//workspace_ui//packages//manager
+  extensions:
+    path: D://FLUTTER//workspace_ui//packages//extensions
 dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.7

@@ -1,5 +1,3 @@
-import 'package:manager/state_manager/management/notifier.dart';
-
 import '../../main.dart';
 
 part 'settings.g.dart';
@@ -26,24 +24,43 @@ class SettingsState with _$SettingsState {
 
 final settingsRM = SettingsRM();
 
-class SettingsRM extends Notifier<SettingsState> {
-  @override
-  SettingsState get initialState => SettingsState();
-  void setThemeMode(ThemeMode? _) => state = state.copyWith(themeMode: _!);
-
-  void setNotesViewMode(NotesViewMode? _) =>
-      state = state.copyWith(notesViewMode: _!);
-
-  void setDeletionDuration(Duration duration) =>
-      state = state.copyWith(deleteAfter: duration);
-  @override
-  Persistor<SettingsState>? get persistor {
-    return Persistor(
-      key: 'settings',
-      toJson: (s) => s.toJson(),
-      fromJson: SettingsState.fromJson,
-    );
+class SettingsRM {
+  final state = RM(() => SettingsState());
+  ThemeMode themeMode([ThemeMode? _themeMode]) {
+    if (_themeMode != null) {
+      state(
+        state().copyWith(themeMode: _themeMode),
+      );
+    }
+    return state().themeMode;
   }
+
+  NotesViewMode notesViewMode([NotesViewMode? _notesViewMode]) {
+    if (_notesViewMode != null) {
+      state(
+        state().copyWith(notesViewMode: _notesViewMode),
+      );
+    }
+    return state().notesViewMode;
+  }
+
+  Duration deleteAfter([Duration? _deleteAfter]) {
+    if (_deleteAfter != null) {
+      state(
+        state().copyWith(deleteAfter: _deleteAfter),
+      );
+    }
+    return state().deleteAfter;
+  }
+
+  // @override
+  // Persistor<SettingsState>? get persistor {
+  //   return Persistor(
+  //     key: 'settings',
+  //     toJson: (s) => s.toJson(),
+  //     fromJson: SettingsState.fromJson,
+  //   );
+  // }
 }
 
 // class MaterialColorConverter implements JsonConverter<MaterialColor, int> {
