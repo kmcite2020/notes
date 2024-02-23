@@ -1,7 +1,5 @@
 export 'package:appwrite/appwrite.dart';
-export 'package:manager/manager.dart' hide Locale;
 import 'package:notes/main.dart';
-export 'package:manager/state_manager/ui/ui.dart';
 export 'package:flutter/material.dart' hide Locale, State;
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 export 'dart:convert';
@@ -17,7 +15,7 @@ export 'package:notes/features/notes/components/note_item.dart';
 export 'package:notes/features/archives.dart';
 export 'package:notes/features/drawer.dart';
 export 'package:notes/features/feedback.dart';
-
+import 'package:manager/manager.dart';
 export 'package:notes/features/notes/pages/notes_page.dart';
 export 'package:notes/features/reminders.dart';
 export 'package:notes/features/settings/settings_page.dart';

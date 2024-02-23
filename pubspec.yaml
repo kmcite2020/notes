@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  states_rebuilder: 6.3.0
+  states_rebuilder: ^6.4.0
   hive_flutter:
   flex_color_scheme:
   uuid: ^4.2.1
@@ -21,8 +21,7 @@ dependencies:
   appwrite: ^11.0.1
   isar: ^4.0.0-dev.14
   isar_flutter_libs: ^4.0.0-dev.14
-  manager:
-    git: https://github.com/kmcite2020/manager
+  manager: ^0.4.1
 dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.7
