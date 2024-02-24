@@ -10,10 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  states_rebuilder: ^6.4.0
-  hive_flutter:
   flex_color_scheme:
-  uuid: ^4.2.1
   colornames: ^0.1.0
   path_provider: ^2.1.1
   json_annotation: ^4.8.1
