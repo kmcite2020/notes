@@ -1,21 +1,38 @@
-import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:notes/main.dart';
+import '../main.dart';
 
-part 'settings.freezed.dart';
-part 'settings.g.dart';
-
-enum ViewMode { list, grid }
-
-@freezed
-class Settings with _$Settings {
-  const factory Settings({
-    @Default(ViewMode.list) final ViewMode viewMode,
-    @Default(ThemeMode.system) final ThemeMode themeMode,
-    @Default(8.0) final double borderRadius,
-    @Default(8.0) final double padding,
-  }) = _Settings;
-
-  factory Settings.fromJson(Map<String, dynamic> json) =>
-      _$SettingsFromJson(json);
+@Entity()
+class Settings {
+  @Id()
+  int id;
+  String themeMode;
+  String viewMode;
+  Settings({
+    this.id = 0,
+    this.themeMode = 'dark',
+    this.viewMode = 'list',
+  });
 }
+
+final viewModes = ['list', 'grid'];
+final themeModes = ['light', 'dark'];
+
+final setBox = store.box<Settings>();
+
+Settings settings([Settings? _]) {
+  if (_ != null) setBox.put(_);
+  return settingsRM.state;
+}
+
+final settingsRM = RM.injectStream<Settings>(
+  () {
+    return setBox
+        .query()
+        .watch(
+          triggerImmediately: true,
+        )
+        .map(
+          (event) => event.find().firstOrNull ?? Settings(),
+        );
+  },
+  initialState: Settings(),
+);
